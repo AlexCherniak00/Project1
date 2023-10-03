@@ -1,3 +1,4 @@
+-- revenue in each of the store
 with a as 
 (
 select store_id,
@@ -24,7 +25,7 @@ on b.store_id= a.store_id
 order by sum_revenue DESC
 
 
--- כמות קניות וקונים בכל חנות?
+-- volume of shopping and customers in each of the store
 select store_id,
 COUNT (distinct a.customer_id) customers,
 COUNT (order_id) orders
@@ -33,7 +34,7 @@ group by store_id
 
 
 
--- איזה מוצרים נמכרים יותר? איזה פחות?
+-- orders per product
 select *
 from (
 select product_name,
@@ -46,7 +47,7 @@ group by product_name ) q
 --where q.maxi= q.orders
 order by orders DESC
 
---מה הקטוגריה הכי רווחית?
+--orders per category
 
 with a as
 (
@@ -76,7 +77,7 @@ left join b
 on a.category_id= b.category_id
 
 
--- איזה מותגים הכי נמכרים?
+-- orders per brand
 select q.brand_id,
 brand_name,
 q.orders
